@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Catering Service - I nostri Chef')"></head>
+<body>
+	
+	<div th:replace="fragments/base.html :: navbar"></div>	
+	
+	
+	<div class="container card my-4 pb-3 shadow-lg">
+		<div class="row d-flex justify-content-center m-3">
+			<div class="d-flex col m-2 justify-content-end">
+				<a sec:authorize="hasAuthority('ADMIN')" th:href = @{/chef/add/form} href="/" class="btn btn-outline-primary shadow"> + Aggiungi Chef</a>
+			</div>
+		</div>
+			
+			<h2> I nostri chef </h2>
+			<div th:each="chef : ${chefs}" class="col-md-6 col-lg-4 d-flex justify-content-center my-3">
+				<div class="card" style="width: 18rem;">
+					<img src="/img/chef.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title mx-3" th:text="${chef.name}">Chef nome</h5>
+						<h5 class="card-title mx-3" th:text="${chef.surname}">Chef cognome</h5>
+						<p class="card-title mx-3" th:text="${chef.nationality}">Chef nazione</p>
+						
+						<div class="row d-flex justify-content-center px-3 my-2">
+							<a sec:authorize="isAuthenticated()" th:href = "@{'/chef/' + ${chef.id}}" href="/" class="btn btn-primary shadow-sm">
+								Visualizza Dettagli
+							</a>			    					
+						</div>		    			 	
+						<div class="row d-flex justify-content-center px-3 my-2">
+							<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/chef/edit/' + ${chef.id}}" href="/"  class="btn btn-outline-success shadow-sm">
+								Modifica
+							</a>			    					
+						</div>	
+						<div class="row d-flex justify-content-center px-3 my-2">
+							<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/chef/delete/' + ${chef.id}}" href="/" class="btn btn-outline-danger shadow-sm">
+								Elimina
+							</a>				    								    					
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div th:replace="fragments/base.html :: footer"></div>
+
+	</body>
+	</html>

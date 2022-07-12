@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Catering Service - Aggiungi Chef')"></head>
+
+	<body>
+		<div th:replace="fragments/base.html :: navbar"></div>
+		
+		<div class="d-flex container justify-content-center px-0">
+			<div class="col card shadow" >
+				<h3 class="card-title m-3 d-flex justify-content-center">Inserimento chef</h3>
+
+				<form th:action="@{/chef/add}" method="post"  th:object="${chef}" class="m-3">
+				 <div th:if="${#fields.hasGlobalErrors()}">
+				 	<p class="badge text-bg-danger my-2" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+				 </div>				  
+				  				  
+				  <div class="mb-4 px-5">
+				    <label class="form-label">Nome</label>
+				    <input th:field="*{name}" type="text" required class="form-control shadow">
+				  </div>
+				  <div class="mb-4 px-5">
+				    <label class="form-label">Cognome</label>
+				    <input th:field="*{surname}" type="text" required class="form-control shadow">
+				  </div>
+				  <div class="mb-4 px-5">
+				    <label class="form-label">Nazionalità</label>
+				    <input th:field="*{nationality}" type="text" required class="form-control shadow">
+				  </div>
+				  <a  th:href="@{/chef/all}" href="/" class="shadow btn btn-danger">Annulla</a>
+				  <button type="submit" class="btn btn-primary shadow">+ Aggiungi Chef</button>
+				</form>				
+			</div>
+		</div>		
+
+	</body>
+</html>

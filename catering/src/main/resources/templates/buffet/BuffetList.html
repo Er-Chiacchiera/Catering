@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/base.html :: headerfiles(title='Catering Service - I nostri Buffet')"></head>
+
+<body>
+
+	<div th:replace="fragments/base.html :: navbar"></div>
+	
+	
+	
+	<div class="container card rounded bg-white px-5">
+		<div class="py-4">
+		<h2 class="text"> I nostri buffet </h2>
+		</div>
+		<div class="pb-4" th:each="buffet : ${buffets}">
+			<div class="card" style="width: 18rem;">
+				<img src="/img/food.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${buffet.name}">Buffet name</h5>
+					<p class="card-text" th:text="${buffet.description}">Descrizione buffet</p>
+					<div class="row d-flex justify-content-center px-3 my-4">
+						<a sec:authorize="isAuthenticated()" href="BuffetList.html" th:href = "@{'/buffet/' + ${buffet.id}}" class="btn btn-primary shadow">Visualizza Dettagli</a>			    					
+					</div>
+					<div class="col-8 d-flex  justify-content-center align-items-center">	
+						<a sec:authorize="isAuthenticated()" href="BuffetList.html" th:href = "@{'/chef/' + ${buffet.chef.id}}" 
+						class="btn btn-outline-success m-0 shadow" th:text="|${buffet.chef.name} ${buffet.chef.surname}|"></a>				    									    							
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>
